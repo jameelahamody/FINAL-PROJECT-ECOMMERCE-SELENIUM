@@ -3,7 +3,7 @@ import selenium
 import time
 from selenium import webdriver
 import selenium.webdriver as webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webelement import WebElement
@@ -14,7 +14,6 @@ from selenium.webdriver.remote.webelement import WebElement
 def driver():
     chrome_driver_binary = r'.\drivers\chromedriver'
     driver = webdriver.Chrome(chrome_driver_binary)
-    driver.get('https://www.telerik.com')
     yield driver
     driver.close()
 
@@ -25,7 +24,7 @@ def test_incorrect_values_fields(driver):
         driver.maximize_window()
         driver.delete_all_cookies()
         time.sleep(3)
-        driver.find_element(By.CSS_SELECTOR, "#Email-1").send_keys("safa_ham99@gmail.com")
+        driver.find_element(By.CSS_SELECTOR, "#Email-1").send_keys("munazaki990@gmail.com")
         time.sleep(1)
         driver.find_element(By.CSS_SELECTOR, "#Textbox-1").send_keys("1234")
         time.sleep(1)
@@ -45,3 +44,5 @@ def test_incorrect_values_fields(driver):
 
     except NoSuchElementException:
         print("error")
+    except WebDriverException:
+        print('registration-successful')
