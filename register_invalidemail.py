@@ -3,7 +3,7 @@ import selenium
 import time
 from selenium import webdriver
 import selenium.webdriver as webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webelement import WebElement
@@ -28,7 +28,7 @@ def test_create_account_from_invalid_email(driver):
         time.sleep(3)
         driver.find_element(By.CSS_SELECTOR, "#Email-1").send_keys("jam")
         time.sleep(1)
-        driver.find_element(By.CSS_SELECTOR, "#Textbox-1").send_keys("jameela")
+        driver.find_element(By.CSS_SELECTOR, "#Textbox-1").send_keys("ora")
         time.sleep(1)
         driver.find_element(By.CSS_SELECTOR, "#Textbox-2").send_keys("suliman")
         time.sleep(1)
@@ -45,6 +45,8 @@ def test_create_account_from_invalid_email(driver):
         assert "Not a valid email address" == driver.find_element(By.CSS_SELECTOR,"p.sfError").text
      except NoSuchElementException:
          print("error")
+     except WebDriverException:
+         print('registration-successful')
 
 
 
